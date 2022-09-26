@@ -7,7 +7,7 @@
     "build": "tsc src/server.ts",
     "dev": "nodemon src/server.ts",
     "start": "node dist/server.js",
-    "test":"jest -i",
+    "test":"jest -i --coverage",
     "dev:test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test nodemon src/server.ts",
     "test:integration": "dotenv -e .env.test jest -- -i ./tests/integration",
     "test:unit": "dotenv -e .env.test jest -- -i ./tests/unit"
