@@ -53,8 +53,8 @@ describe("tests route POST '/recommendation'", () => {
   });
 });
 
-describe("tests route POST /recommendations/:id/upvote", () => {
-  it("should return status when a recommendation is upvoted ", async () => {
+describe("tests route POST '/recommendations/:id/upvote'", () => {
+  it("should return status 200 when a recommendation is upvoted ", async () => {
     const recommendation = await createRecommendation();
     const newRecommendation = await prisma.recommendation.create({
       data: recommendation,
@@ -76,8 +76,8 @@ describe("tests route POST /recommendations/:id/upvote", () => {
   });
 });
 
-describe("tests route POST /recommendations/:id/downvote", () => {
-  it("should return status when a recommendation is downvoted ", async () => {
+describe("tests route POST '/recommendations/:id/downvote'", () => {
+  it("should return status 200 when a recommendation is downvoted ", async () => {
     const recommendation = await createRecommendation();
     const newRecommendation = await prisma.recommendation.create({
       data: recommendation,
