@@ -53,8 +53,8 @@ describe("tests route POST /recommendations/:id/upvote", () => {
 
   it("should not upvote a recommendation that is invalid", async () => {
     jest.spyOn(recommendationRepository, "find").mockResolvedValueOnce(null);
-    const promise = recommendationService.upvote(0);
-    expect(promise).rejects.toEqual({ message: "", type: "not_found" });
+    const result = recommendationService.upvote(0);
+    expect(result).rejects.toEqual({ message: "", type: "not_found" });
   });
 });
 
@@ -71,8 +71,8 @@ describe("tests route POST /recommendations/:id/downvote", () => {
 
   it("should not downvote a recommendation that is invalid", async () => {
     jest.spyOn(recommendationRepository, "find").mockResolvedValueOnce(null);
-    const promise = recommendationService.downvote(0);
-    expect(promise).rejects.toEqual({ message: "", type: "not_found" });
+    const result = recommendationService.downvote(0);
+    expect(result).rejects.toEqual({ message: "", type: "not_found" });
   });
 });
 
@@ -91,20 +91,5 @@ describe("tests route GET'/recommendations/:id'", () => {
     jest.spyOn(recommendationRepository, "find").mockResolvedValueOnce(data);
     await recommendationService.getById(data.id);
     expect(recommendationRepository.find).toHaveBeenCalled();
-  });
-});
-
-describe("tests route GET '/recommendations/random'", () => {
-  it("should get random recommendations", async () => {
-    const data = await createTenRecommendations();
-    jest.spyOn(recommendationRepository, "findAll").mockResolvedValueOnce(data);
-    await recommendationService.getRandom();
-    expect(recommendationRepository.getAmountByScore).toHaveBeenCalled();
-  });
-
-  it("should not return random recommendations", async () => {
-    jest.spyOn(recommendationRepository, "findAll").mockResolvedValueOnce([]);
-    const promise = recommendationService.getRandom();
-    expect(promise).rejects.toEqual({ message: "", type: "not_found" });
   });
 });
