@@ -1,6 +1,5 @@
 import { prisma } from "../../src/database";
 import { faker } from "@faker-js/faker";
-import { recommendationSchema } from "../../src/schemas/recommendationsSchemas";
 
 export async function deleteAllData() {
   await prisma.$transaction([
@@ -97,4 +96,30 @@ export async function insertStaticScore(id: number) {
       score: -5,
     },
   });
+}
+
+export async function createRecommendationWithId() {
+  const recommendation = await prisma.recommendation.create({
+    data: {
+      id: parseInt(faker.finance.amount(0, 5, 0)),
+      name: faker.name.firstName(),
+      youtubeLink: "https://www.youtube.com/watch?v=5yRX9e40nRY",
+      score: 0,
+    },
+  });
+  return recommendation;
+}
+
+export async function createTenRecommendations() {
+  let recomendationsArray = [];
+  for (let i = 0; i < 11; i++) {
+    const recommendation = await prisma.recommendation.create({
+      data: {
+        name: faker.lorem.words(5),
+        youtubeLink: "https://www.youtube.com/watch?v=xnS2tbgcTc0",
+      },
+    });
+    recomendationsArray.push(recommendation);
+  }
+  return recomendationsArray;
 }
